@@ -70,8 +70,5 @@ export const profile = async (req, res) => {
         id: userFound._id,
         username: userFound.username,
         email: userFound.email,
-    })
-
-    console.log(req.user);
-    res.send('Profile');
+    });
 };
