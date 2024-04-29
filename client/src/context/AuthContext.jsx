@@ -61,6 +61,7 @@ export const AuthProvider = ({ children }) => {
             const cookies = Cookies.get();
             if (!cookies.token) {
                 setIsAuthenticated(false);
+                setLoading(false);
                 return setUser(null);
             }
             try {
@@ -71,12 +72,12 @@ export const AuthProvider = ({ children }) => {
                     return;
                 }
                 setIsAuthenticated(true); 
-                setUser(res.data)
+                setUser(res.data);
+                setLoading(false);
             } catch (error) {
                 setIsAuthenticated(false);
                 setUser(null);
                 setLoading(false);
-
             }
         }
         checkLogin();
