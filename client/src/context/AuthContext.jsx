@@ -45,6 +45,12 @@ export const AuthProvider = ({ children }) => {
             }
             setErrors([error.response.data.message])
         }
+    };
+
+    const logout = () => {
+        Cookies.remove("token");
+        setIsAuthenticated(false);
+        setUser(null);
     }
 
     useEffect(() => {
@@ -55,6 +61,7 @@ export const AuthProvider = ({ children }) => {
             return () => clearTimeout(timer);
         }
     }, [errors])
+
 
     useEffect(() => {
         async function checkLogin() {
@@ -83,5 +90,5 @@ export const AuthProvider = ({ children }) => {
         checkLogin();
     }, [isAuthenticated]);
 
-    return (<AuthContext.Provider value = {{signup, signin, loading, user, isAuthenticated, errors,}}>{children}</AuthContext.Provider>);
+    return (<AuthContext.Provider value = {{signup, signin, logout, loading, user, isAuthenticated, errors,}}>{children}</AuthContext.Provider>);
 };
