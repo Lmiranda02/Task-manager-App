@@ -4,25 +4,24 @@ import { useTasks } from "../context/TasksContext";
 import { Link } from 'react-router-dom';
 import dayjs from "dayjs";
 import utc from "dayjs";
-dayjs.extend(utc)
+dayjs.extend(utc);
 
-// eslint-disable-next-line react/prop-types
 function TaskCard({ task }) {
     const { deleteTask } = useTasks();
+
     return (
-        <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
-            <header className="flex justify-between">
-            <h1 className="text-2xl font-bold">{task.title}</h1>
-            <div className="flex gap-x-2 items-center">
-                <button className="bg-red-500 hover:bg-reed-700 text-white px-4 py-2 rounded-md" onClick={() => {
-                    deleteTask(task._id);
-                }}>Delete</button>
-                <Link to={`/tasks/${task._id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Edit</Link>
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-96">
+            <div className="px-6 py-4">
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">{task.title}</h1>
+                <p className="text-sm text-gray-600 mb-2">{dayjs(task.date).utc().format('DD/MM/YYYY')}</p>
+                <p className="text-gray-700">{task.description}</p>
             </div>
-            </header>
-            <p className="text-slate-300">{task.description}</p>
-            <p>{dayjs(task.date).utc().format('DD/MM/YYYY')}</p>
+            <div className="px-6 py-4 flex justify-between items-center">
+                <Link to={`/tasks/${task._id}`} className="text-indigo-600 hover:text-indigo-900 font-semibold">Edit</Link>
+                <button className="text-red-600 hover:text-red-900 font-semibold" onClick={() => deleteTask(task._id)}>Delete</button>
+            </div>
         </div>
     );
 }
+
 export default TaskCard;
