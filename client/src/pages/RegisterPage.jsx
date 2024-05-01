@@ -19,7 +19,8 @@ function RegisterPage()
     });
 
     return (
-        <div className='bg-zinc-800 max-w-md p10 rounded-md'>
+        <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
+        <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
             {
                 registerErrors.map((error, i)=> (
                     <div className='bg-red-500 p-2 text-white' key={i}>
@@ -27,6 +28,8 @@ function RegisterPage()
                     </div>
                 ))
             }
+            <h1 className='text-3xl font-bold my-2'>Register</h1>
+
             <form onSubmit= {onSubmit}>
                 <input type="text" {... register("username", { required: true})}
                     className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
@@ -55,13 +58,14 @@ function RegisterPage()
                             <p className='text-red-500'>Passowrd is required</p>
                         )
                     }
-                <button type="submit">
+                <button type="submit" className='bg-sky-500 text-white px-4 py-2 rounded-md my-2'>
                     Register
                 </button>
             </form>
             <p className='flex gap-x-2 justify-between'>
-                    already have an account?{" "} <Link to="/login">Login</Link>
+                    Already have an account?{" "} <Link to="/login">Login</Link>
                 </p>
+        </div>
         </div>
     )
 }
